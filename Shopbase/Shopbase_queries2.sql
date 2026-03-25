@@ -74,7 +74,7 @@ ORDER BY solgte_enheder DESC;
 SELECT customers.navn, COUNT(orders.order_id) AS antal_ordrer
 FROM orders
 JOIN customers ON orders.bruger_id = customers.bruger_id
-GROUP BY customers.navn
+GROUP BY customers.bruger_id, customers.navn
 ORDER BY antal_ordrer DESC
 LIMIT 5;
 
@@ -148,5 +148,25 @@ AND NOT EXISTS (
 );
 
 
+-- DEL 5
+-- Tæl alle ordrer
+SELECT COUNT(order_id)
+FROM orders;
 
+-- Beregn den samlede omsætning totalt (kun completed ordrer) — vis kundenavn og totalbeløb, 
+-- sorteret med den højeste øverst.
+SELECT 
+	SUM(order_items.antal * order_items.enhedspris) AS totalbeløb
+FROM order_items
+JOIN orders ON orders.order_id = order_items.order_id
+WHERE orders.status = 'completed';
+
+-- Vis total antal kunder
+SELECT COUNT(*)
+FROM customers;
+
+-- Vis total lager antal
+SELECT 
+	SUM(lagerantal)
+FROM products;
 
