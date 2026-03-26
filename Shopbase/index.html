@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0">
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KPI Box</title>
+    <title>Shopbase Dashboard</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 1pt;
+            padding: 10pt;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f5f5;
             padding: 20px;
+            box-sizing: border-box;
+            border: 2px solid powderblue;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0b4747;
+        }
+
+        h2 {
+            text-align: center;
+            color: #126868;
         }
 
         .kpi-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 15px;
             max-width: 1200px;
         }
 
         .kpi-box {
-            background: white;
+            background: rgb(181, 214, 216);
             border-radius: 8px;
-            padding: 24px;
+            padding: 10px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .kpi-box:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
 
         .kpi-label {
@@ -53,45 +61,204 @@
             margin-bottom: 12px;
         }
 
-        .kpi-change {
-            font-size: 13px;
-            font-weight: 600;
+        table,
+        th,
+        td {
+            border-color: #126868;
+            border-width: 2px;
+            border-style: solid;
+            border-spacing: 1px;
+            width: 50%;
+            padding: 6px;
+            margin: auto;
+            text-align: center;
         }
 
-        .kpi-change.positive {
-            color: #28a745;
+        tr:nth-child(even) {
+            background-color: #d9ecec;
         }
 
-        .kpi-change.negative {
-            color: #dc3545;
-        }
+        #myChart {
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            margin: auto;}
     </style>
 </head>
+
 <body>
+    <h1>Shopbase Dashboard</h1>
     <div class="kpi-container">
         <div class="kpi-box">
-            <div class="kpi-label">Total Revenue</div>
-            <div class="kpi-value">$45,230</div>
-            <div class="kpi-change positive">↑ 12.5% vs last month</div>
+            <div class="kpi-label">Antal Ordre</div>
+            <div class="kpi-value">30</div>
         </div>
-
         <div class="kpi-box">
-            <div class="kpi-label">Orders</div>
-            <div class="kpi-value">1,204</div>
-            <div class="kpi-change positive">↑ 8.2% vs last month</div>
+            <div class="kpi-label">Samlet omsætning</div>
+            <div class="kpi-value">58.500 kr.</div>
         </div>
-
         <div class="kpi-box">
-            <div class="kpi-label">Customers</div>
-            <div class="kpi-value">832</div>
-            <div class="kpi-change negative">↓ 3.1% vs last month</div>
+            <div class="kpi-label">Antal kunder</div>
+            <div class="kpi-value">18</div>
         </div>
-
         <div class="kpi-box">
-            <div class="kpi-label">Avg Order Value</div>
-            <div class="kpi-value">$37.50</div>
-            <div class="kpi-change positive">↑ 5.3% vs last month</div>
+            <div class="kpi-label">Antal produkter på lager</div>
+            <div class="kpi-value">460</div>
         </div>
     </div>
+
+    <h2>Top 5 bedst sælgende produkter</h2>
+    <table>
+        <tr>
+            <th>Produkt</th>
+            <th>Enheder solgt</th>
+        </tr>
+        <tr>
+            <td>Jeans</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>T-shirt</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Stol</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Mus</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Jakke</td>
+            <td>4</td>
+        </tr>
+    </table>
+
+    <h2>De 5 seneste ordrer</h2>
+    <table>
+        <tr>
+            <th>Ordre-id</th>
+            <th>Kundenavn</th>
+            <th>Dato</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>30</td>
+            <td>Freja Nielsen</td>
+            <td>2024-04-15</td>
+            <td><span style="color: orange;">pending</span></td>
+        </tr>
+        <tr>
+            <td>29</td>
+            <td>Mikkel Sørensen</td>
+            <td>2024-04-12</td>
+            <td><span style="color: green;">completed</span></td>
+        </tr>
+        <tr>
+            <td>28</td>
+            <td>Cecilie Ravn</td>
+            <td>2024-04-10</td>
+            <td><span style="color: red;">cancelled</span></td>
+        </tr>
+        <tr>
+            <td>27</td>
+            <td>Bo Madsen</td>
+            <td>2024-04-08</td>
+            <td><span style="color: green;">completed</span></td>
+        </tr>
+        <tr>
+            <td>26</td>
+            <td>Anna Larsen</td>
+            <td>2024-04-05</td>
+            <td><span style="color: green;">completed</span></td>
+        </tr>
+    </table>
+
+    <h2>Omsætning pr. kunde top 5</h2>
+    <table>
+        <tr>
+            <th>Kundenavn</th>
+            <th>Totalbeløb</th>
+        </tr>
+        <tr>
+            <td>Freja Nielsen</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Mikkel Sørensen</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Bo Madsen</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Anna Larsen</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Cecilie Ravn</td>
+            <td>6</td>
+        </tr>
+    </table>
+
+    <h2>Månedlig omsætning</h2>
+    <table>
+        <tr>
+            <th>År & Måned</th>
+            <th>Beløb</th>
+        </tr>
+        <tr>
+            <td>2024-01</td>
+            <td>24500</td>
+        </tr>
+        <tr>
+            <td>2024-02</td>
+            <td>39000</td>
+        </tr>
+        <tr>
+            <td>2024-03</td>
+            <td>47700</td>
+        </tr>
+        <tr>
+            <td>2024-04</td>
+            <td>22200</td>
+        </tr>
+    </table>
+
+
+    <h2>Månedlig omsætning (graf)</h2>
+
+    <canvas id="myChart"></canvas>
+
+    <script>
+        const xValues = ["Jan", "Feb", "Mar", "Apr"];
+        const yValues = [24500, 39000, 47700, 22200];
+        const barColors = ["red", "green", "blue", "orange"];
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: "Omsætning (kr.)",
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true },
+                    title: {
+                        display: true,
+                        text: "Månedlig omsætning"
+                    }
+                }
+            }
+        });
+    </script>
 </body>
+
 </html>
