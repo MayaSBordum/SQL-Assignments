@@ -1,11 +1,3 @@
-/*
-Drop TABLE customers;
-Drop TABLE products;
-Drop TABLE orders;
-Drop TABLE order_items;
-*/
-
-
 CREATE TABLE customers (
 	bruger_id SERIAL PRIMARY KEY, 
 	navn VARCHAR(30) NOT NULL, 
